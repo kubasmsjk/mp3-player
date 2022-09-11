@@ -6,7 +6,8 @@
 <?import javafx.scene.control.MenuItem?>
 <AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="pl.javastart.mp3player.controller.MenuPaneController">
-    <MenuBar>
+    <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+             AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" text="Open Mp3 File"/>
             <MenuItem fx:id="dirMenuItem" mnemonicParsing="false" text="Open directory"/>
