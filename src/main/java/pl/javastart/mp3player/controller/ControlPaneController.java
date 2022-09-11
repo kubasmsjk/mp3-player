@@ -30,13 +30,13 @@ public class ControlPaneController {
 
     private void configureVolume() {
         volumeSlider.addEventFilter(MouseEvent.MOUSE_PRESSED, event ->
-                System.out.println("Wciśnięto przycisk na suwaku głośności")
+                System.out.println("Wcisnieto przycisk na suwaku glosnosci")
         );
     }
 
     private void configureButtons() {
         previousButton.setOnAction(event -> System.out.println("Poprzednia piosenka"));
-        nextButton.setOnAction(x -> System.out.println("Następna piosenka"));
+        nextButton.setOnAction(x -> System.out.println("Nastepna piosenka"));
         playButton.setOnAction(event -> {
             if(playButton.isSelected()) {
                 System.out.println("Play");
