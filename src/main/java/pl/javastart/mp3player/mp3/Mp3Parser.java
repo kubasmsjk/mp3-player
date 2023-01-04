@@ -1,5 +1,6 @@
 package pl.javastart.mp3player.mp3;
 
+import javafx.scene.media.MediaPlayer;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
 

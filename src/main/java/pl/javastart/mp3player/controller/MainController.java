@@ -22,7 +22,7 @@ public class MainController {
     @FXML
     private MenuPaneController menuPaneController;
 
-    private Mp3Player player;
+    private Mp3Player player = null;
 
     public void initialize() {
         createPlayer();
@@ -32,8 +32,10 @@ public class MainController {
     }
 
     private void createPlayer() {
+        player = Mp3Player.getInstance();
+
         ObservableList<Mp3Song> items = contentPaneController.getContentTable().getItems();
-        player = new Mp3Player(items);
+        player.init(items);
     }
 
     private void configureTableClick() {
@@ -107,7 +109,7 @@ public class MainController {
 
         openFile.setOnAction(event -> {
             FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3"));
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3","*.wav"));
             File file = fc.showOpenDialog(new Stage());
             try {
                 contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));

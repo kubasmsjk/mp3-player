@@ -10,11 +10,28 @@ import java.io.File;
 
 public class Mp3Player {
     private ObservableList<Mp3Song> songList;
-
     private Media media;
     private MediaPlayer mediaPlayer;
+    private static volatile Mp3Player instance = null;
 
-    public Mp3Player(ObservableList<Mp3Song> songList) {
+    private Mp3Player() {
+        if (instance != null) {
+            throw new RuntimeException("Niedozwolone. Uzyj metody getInstance()");
+        }
+    }
+
+    public static Mp3Player getInstance() {
+        if (instance == null) {
+            synchronized (Mp3Player.class) {
+                if (instance == null) {
+                    instance = new Mp3Player();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void init(ObservableList<Mp3Song> songList) {
         this.songList = songList;
     }
 
@@ -23,19 +40,19 @@ public class Mp3Player {
     }
 
     public void play() {
-        if(mediaPlayer != null && (mediaPlayer.getStatus() == Status.READY || mediaPlayer.getStatus() == Status.PAUSED)) {
+        if (mediaPlayer != null && (mediaPlayer.getStatus() == Status.READY || mediaPlayer.getStatus() == Status.PAUSED)) {
             mediaPlayer.play();
         }
     }
 
     public void stop() {
-        if(mediaPlayer != null && mediaPlayer.getStatus() == Status.PLAYING) {
+        if (mediaPlayer != null && mediaPlayer.getStatus() == Status.PLAYING) {
             mediaPlayer.pause();
         }
     }
 
     public double getLoadedSongLength() {
-        if(media != null) {
+        if (media != null) {
             return media.getDuration().toSeconds();
         } else {
             return 0;
@@ -43,13 +60,13 @@ public class Mp3Player {
     }
 
     public void setVolume(double volume) {
-        if(mediaPlayer != null) {
+        if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume);
         }
     }
 
     public void loadSong(int index) {
-        if(mediaPlayer != null && mediaPlayer.getStatus() == Status.PLAYING) {
+        if (mediaPlayer != null && mediaPlayer.getStatus() == Status.PLAYING) {
             mediaPlayer.stop();
         }
         Mp3Song mp3s = songList.get(index);
