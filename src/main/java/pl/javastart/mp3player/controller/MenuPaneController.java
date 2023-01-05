@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
@@ -15,13 +16,16 @@ import java.io.IOException;
 public class MenuPaneController {
     @FXML
     private MenuItem fileMenuItem;
-
     @FXML
     private MenuItem dirMenuItem;
-
     @FXML
     private MenuItem closeMenuItem;
-
+    @FXML
+    private MenuItem createPlaylistMenuItem;
+    @FXML
+    private MenuItem deletePlaylistMenuItem;
+    @FXML
+    private Menu libraryMenuItem;
     @FXML
     private MenuItem aboutMenuItem;
 
@@ -39,6 +43,18 @@ public class MenuPaneController {
 
     public MenuItem getAboutMenuItem() {
         return aboutMenuItem;
+    }
+
+    public MenuItem getCreatePlaylistMenuItem() {
+        return createPlaylistMenuItem;
+    }
+
+    public MenuItem getDeletePlaylistMenuItem() {
+        return deletePlaylistMenuItem;
+    }
+
+    public Menu getLibraryMenuItem() {
+        return libraryMenuItem;
     }
 
     public void initialize() {

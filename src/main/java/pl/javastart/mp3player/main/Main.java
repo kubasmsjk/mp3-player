@@ -17,7 +17,7 @@ public class Main extends Application {
         Pane mainPane = FXMLLoader.load(getClass().getResource("/fxml/mainPane.fxml"));
         Scene scene = new Scene(mainPane);
         stage.setScene(scene);
-        stage.setTitle("Odtwarzacz muzyczny");
+        stage.setTitle("Mp3 Player");
         stage.show();
     }
 }
