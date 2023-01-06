@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mp3File implements IMp3Parser{
-    @Override
     public Mp3Song createMp3Song(File file) throws IOException, TagException {
         MP3File mp3File = new MP3File(file);
         String absolutePath = file.getAbsolutePath();
@@ -19,7 +18,6 @@ public class Mp3File implements IMp3Parser{
         return new Mp3Song(title, author, album, absolutePath);
     }
 
-    @Override
     public List<Mp3Song> createMp3List(File dir) throws IOException, TagException {
         if(!dir.isDirectory()) {
             throw new IllegalArgumentException("Not a directory");

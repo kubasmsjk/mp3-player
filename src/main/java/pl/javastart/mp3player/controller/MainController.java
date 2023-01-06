@@ -13,10 +13,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import pl.javastart.mp3player.mp3.Mp3Parser;
+import pl.javastart.mp3player.mp3.Mp3File;
 import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.mp3.Mp3WavAdapter;
 import pl.javastart.mp3player.player.Mp3Player;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -115,19 +116,22 @@ public class MainController {
         MenuItem createPlaylist = menuPaneController.getCreatePlaylistMenuItem();
         MenuItem deletePlayList = menuPaneController.getDeletePlaylistMenuItem();
         MenuItem musicLibrary = menuPaneController.getLibraryMenuItem();
+        Mp3File mp3File = new Mp3File();
 
         openFile.setOnAction(event -> {
             FileChooser fc = new FileChooser();
             fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3", "*.wav"));
             File file = fc.showOpenDialog(new Stage());
-            File target = new File("C:\\Users\\JakubMieczkowski(109\\IdeaProjects\\mp3player\\songs\\a2.mp3");
+            File target = new File("C:\\Users\\JakubMieczkowski(109\\IdeaProjects\\mp3player\\songs\\a5.mp3");
+            String ext = FilenameUtils.getExtension(file.getAbsolutePath());
+
             try {
-                if (file.getName().endsWith(".wav")) {
+                if (ext.equals("wav")) {
                     Mp3WavAdapter mp3WavAdapter = new Mp3WavAdapter();
-                    file = mp3WavAdapter.convertWavFileToMp3File(file,target);
-                    contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
-                }else {
-                    contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+                    file = mp3WavAdapter.convertWavFileToMp3File(file, target);
+                    contentPaneController.getContentTable().getItems().add(mp3File.createMp3Song(file));
+                } else {
+                    contentPaneController.getContentTable().getItems().add(mp3File.createMp3Song(file));
                 }
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
@@ -140,7 +144,7 @@ public class MainController {
             DirectoryChooser dc = new DirectoryChooser();
             File dir = dc.showDialog(new Stage());
             try {
-                contentPaneController.getContentTable().getItems().addAll(Mp3Parser.createMp3List(dir));
+                contentPaneController.getContentTable().getItems().addAll(mp3File.createMp3List(dir));
                 showMessage("Wczytano dane z folderu " + dir.getName());
             } catch (Exception e) {
                 showMessage("Wystąpil blad podczas odczytu folderu");
