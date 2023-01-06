@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import pl.javastart.mp3player.mp3.Mp3Parser;
 import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Mp3WavAdapter;
 import pl.javastart.mp3player.player.Mp3Player;
 
 import java.io.File;
@@ -119,11 +120,19 @@ public class MainController {
             FileChooser fc = new FileChooser();
             fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3", "*.wav"));
             File file = fc.showOpenDialog(new Stage());
+            File target = new File("C:\\Users\\JakubMieczkowski(109\\IdeaProjects\\mp3player\\songs\\a2.mp3");
             try {
-                contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+                if (file.getName().endsWith(".wav")) {
+                    Mp3WavAdapter mp3WavAdapter = new Mp3WavAdapter();
+                    file = mp3WavAdapter.convertWavFileToMp3File(file,target);
+                    contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+                }else {
+                    contentPaneController.getContentTable().getItems().add(Mp3Parser.createMp3Song(file));
+                }
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
                 showMessage("Nie można otworzyc pliku " + file.getName());
+                System.out.println(e.getMessage());
             }
         });
 
@@ -139,19 +148,19 @@ public class MainController {
         });
 
         createPlaylist.setOnAction(new EventHandler<>() {
-                @Override
-                public void handle(ActionEvent arg0) {
-                    try {
-                        Parent parent = FXMLLoader.load(getClass().getResource("/fxml/playlistCreatorPane.fxml"));
-                        Scene scene = new Scene(parent);
-                        Stage stage = new Stage();
-                        stage.setTitle("Playlist");
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace(); //ignore
-                    }
+            @Override
+            public void handle(ActionEvent arg0) {
+                try {
+                    Parent parent = FXMLLoader.load(getClass().getResource("/fxml/playlistCreatorPane.fxml"));
+                    Scene scene = new Scene(parent);
+                    Stage stage = new Stage();
+                    stage.setTitle("Playlist");
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace(); //ignore
                 }
+            }
         });
 
         deletePlayList.setOnAction(event -> {

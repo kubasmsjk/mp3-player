@@ -4,6 +4,8 @@ module mp3player {
     requires javafx.fxml;
     requires javafx.media;
     requires jid3lib;
+    requires jump3r;
+    requires java.desktop;
 
     exports pl.javastart.mp3player.main to javafx.graphics;
     opens pl.javastart.mp3player.controller to javafx.fxml;
