@@ -122,10 +122,8 @@ public class MainController {
         MenuItem deletePlayList = menuPaneController.getDeletePlaylistMenuItem();
         MenuItem musicLibrary = menuPaneController.getLibraryMenuItem();
         Menu sortMenuItem = menuPaneController.getSortMenuItem();
-        MenuItem sortByAuthorMenuItem = menuPaneController.getSortByAuthorMenuItem();
-        MenuItem sortByTitleMenuItem = menuPaneController.getSortByTitleMenuItem();
-        MenuItem sortByLengthMenuItem = menuPaneController.getSortByLengthMenuItem();
 
+        //USUNAC PRZY ADAPTERZE
         Mp3File mp3File = new Mp3File();
 
         openFile.setOnAction(event -> {
@@ -153,30 +151,27 @@ public class MainController {
                 showMessage("Wystąpil blad podczas odczytu folderu");
             }
         });
+
         sortMenuItem.setOnAction(event -> {
             MenuItem menuItem = (MenuItem) event.getTarget();
             String id = menuItem.getId();
-            ObservableList<Mp3Song> items = null;
+
             switch (id) {
                 case "sortByTitleMenuItem":
                     strategy = new SortByTitleStrategy();
-                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
-                    contentPaneController.getContentTable().setItems(items);
+                    strategy.sort(player.getMp3PlayerComponent().getSongList());
                     break;
                 case "sortByAuthorMenuItem":
                     strategy = new SortByAuthorStrategy();
-                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
-                    contentPaneController.getContentTable().setItems(items);
+                    strategy.sort(player.getMp3PlayerComponent().getSongList());
                     break;
                 case "sortByLengthMenuItem":
                     strategy = new SortByLengthStrategy();
-                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
-                    contentPaneController.getContentTable().setItems(items);
+                    strategy.sort(player.getMp3PlayerComponent().getSongList());
                     break;
                 default:
                     strategy = new SortByTitleStrategy();
-                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
-                    contentPaneController.getContentTable().setItems(items);
+                    strategy.sort(player.getMp3PlayerComponent().getSongList());
                     break;
             }
         });

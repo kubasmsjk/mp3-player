@@ -19,8 +19,8 @@ import java.util.List;
 public class Mp3WavAdapter implements IMp3Parser {
     Mp3File mp3File = new Mp3File();
     public File convertWavFileToMp3File(File source, File target) throws IOException {
-        AudioFile f = null;
-        WavTag tag = null;
+        AudioFile f;
+        WavTag tag;
         try {
             f = AudioFileIO.read(source);
             tag = (WavTag) f.getTag();

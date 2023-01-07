@@ -47,6 +47,10 @@ public class Mp3PlayerComponent {
         }
     }
 
+    public ObservableList<Mp3Song> getSongList() {
+        return songList;
+    }
+
     public void loadSong(int index) {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.stop();

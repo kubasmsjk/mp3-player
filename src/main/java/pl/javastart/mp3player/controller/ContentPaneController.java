@@ -26,12 +26,15 @@ public class ContentPaneController {
     private void configureTableColumns() {
         TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        titleColumn.setSortable(false);
 
         TableColumn<Mp3Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        authorColumn.setSortable(false);
 
         TableColumn<Mp3Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
+        albumColumn.setSortable(false);
 
         contentTable.getColumns().add(titleColumn);
         contentTable.getColumns().add(authorColumn);
