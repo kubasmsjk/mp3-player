@@ -8,7 +8,7 @@ import pl.javastart.mp3player.mp3.Mp3Song;
 
 public class ContentPaneController {
 
-    private static final String TITLE_COLUMN = "Tytul";
+    private static final String TITLE_COLUMN = "Title";
     private static final String AUTHOR_COLUMN = "Autor";
     private static final String ALBUM_COLUMN = "Album";
 

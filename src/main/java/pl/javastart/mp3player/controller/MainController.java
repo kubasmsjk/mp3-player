@@ -18,6 +18,10 @@ import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.mp3.Mp3WavAdapter;
 import pl.javastart.mp3player.player.Mp3Player;
 import org.apache.commons.io.FilenameUtils;
+import pl.javastart.mp3player.strategy.ISortStrategy;
+import pl.javastart.mp3player.strategy.SortByAuthorStrategy;
+import pl.javastart.mp3player.strategy.SortByLengthStrategy;
+import pl.javastart.mp3player.strategy.SortByTitleStrategy;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +35,7 @@ public class MainController {
     private MenuPaneController menuPaneController;
 
     private Mp3Player player = null;
+    private ISortStrategy strategy;
 
     public void initialize() {
         createPlayer();
@@ -116,6 +121,11 @@ public class MainController {
         MenuItem createPlaylist = menuPaneController.getCreatePlaylistMenuItem();
         MenuItem deletePlayList = menuPaneController.getDeletePlaylistMenuItem();
         MenuItem musicLibrary = menuPaneController.getLibraryMenuItem();
+        Menu sortMenuItem = menuPaneController.getSortMenuItem();
+        MenuItem sortByAuthorMenuItem = menuPaneController.getSortByAuthorMenuItem();
+        MenuItem sortByTitleMenuItem = menuPaneController.getSortByTitleMenuItem();
+        MenuItem sortByLengthMenuItem = menuPaneController.getSortByLengthMenuItem();
+
         Mp3File mp3File = new Mp3File();
 
         openFile.setOnAction(event -> {
@@ -141,6 +151,33 @@ public class MainController {
                 showMessage("Wczytano dane z folderu " + dir.getName());
             } catch (Exception e) {
                 showMessage("Wystąpil blad podczas odczytu folderu");
+            }
+        });
+        sortMenuItem.setOnAction(event -> {
+            MenuItem menuItem = (MenuItem) event.getTarget();
+            String id = menuItem.getId();
+            ObservableList<Mp3Song> items = null;
+            switch (id) {
+                case "sortByTitleMenuItem":
+                    strategy = new SortByTitleStrategy();
+                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
+                    contentPaneController.getContentTable().setItems(items);
+                    break;
+                case "sortByAuthorMenuItem":
+                    strategy = new SortByAuthorStrategy();
+                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
+                    contentPaneController.getContentTable().setItems(items);
+                    break;
+                case "sortByLengthMenuItem":
+                    strategy = new SortByLengthStrategy();
+                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
+                    contentPaneController.getContentTable().setItems(items);
+                    break;
+                default:
+                    strategy = new SortByTitleStrategy();
+                    items = strategy.sort(contentPaneController.getContentTable()).getItems();
+                    contentPaneController.getContentTable().setItems(items);
+                    break;
             }
         });
 

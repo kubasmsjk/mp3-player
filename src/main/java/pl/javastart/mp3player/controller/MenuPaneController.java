@@ -28,6 +28,14 @@ public class MenuPaneController {
     private Menu libraryMenuItem;
     @FXML
     private MenuItem aboutMenuItem;
+    @FXML
+    private Menu sortMenuItem;
+    @FXML
+    private MenuItem sortByAuthorMenuItem;
+    @FXML
+    private MenuItem sortByLengthMenuItem;
+    @FXML
+    private MenuItem sortByTitleMenuItem;
 
     public MenuItem getFileMenuItem() {
         return fileMenuItem;
@@ -55,6 +63,22 @@ public class MenuPaneController {
 
     public Menu getLibraryMenuItem() {
         return libraryMenuItem;
+    }
+
+    public MenuItem getSortByAuthorMenuItem() {
+        return sortByAuthorMenuItem;
+    }
+
+    public MenuItem getSortByLengthMenuItem() {
+        return sortByLengthMenuItem;
+    }
+
+    public MenuItem getSortByTitleMenuItem() {
+        return sortByTitleMenuItem;
+    }
+
+    public Menu getSortMenuItem() {
+        return sortMenuItem;
     }
 
     public void initialize() {

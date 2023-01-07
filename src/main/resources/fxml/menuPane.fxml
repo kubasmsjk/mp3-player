@@ -19,6 +19,13 @@
         </items>
       </Menu>
       <Menu fx:id="libraryMenuItem" mnemonicParsing="false" text="Library" />
+      <Menu fx:id="sortMenuItem" mnemonicParsing="false" text="Sort">
+        <items>
+          <MenuItem fx:id="sortByTitleMenuItem" mnemonicParsing="false" text="Sort by title" />
+            <MenuItem fx:id="sortByAuthorMenuItem" mnemonicParsing="false" text="Sort by author" />
+            <MenuItem fx:id="sortByLengthMenuItem" mnemonicParsing="false" text="Sort by length" />
+        </items>
+      </Menu>
         <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
         </Menu>
