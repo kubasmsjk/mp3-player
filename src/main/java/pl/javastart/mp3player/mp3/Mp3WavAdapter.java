@@ -1,6 +1,7 @@
 package pl.javastart.mp3player.mp3;
 
 import de.sciss.jump3r.Main;
+import org.apache.commons.io.FilenameUtils;
 import org.farng.mp3.TagException;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -16,6 +17,7 @@ import java.util.List;
 
 
 public class Mp3WavAdapter implements IMp3Parser {
+    Mp3File mp3File = new Mp3File();
     public File convertWavFileToMp3File(File source, File target) throws IOException {
         AudioFile f = null;
         WavTag tag = null;
@@ -42,7 +44,12 @@ public class Mp3WavAdapter implements IMp3Parser {
 
     @Override
     public Mp3Song createMp3Song(File file) throws IOException, TagException {
-        return null;
+        String ext = FilenameUtils.getExtension(file.getAbsolutePath());
+        if (ext.equals("wav")) {
+            File target = new File("C:\\Users\\JakubMieczkowski(109\\IdeaProjects\\mp3player\\songs\\a5.mp3");
+            file = convertWavFileToMp3File(file, target);
+        }
+        return mp3File.createMp3Song(file);
     }
 
     @Override

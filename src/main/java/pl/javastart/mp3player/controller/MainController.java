@@ -122,17 +122,10 @@ public class MainController {
             FileChooser fc = new FileChooser();
             fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3", "*.wav"));
             File file = fc.showOpenDialog(new Stage());
-            File target = new File("C:\\Users\\JakubMieczkowski(109\\IdeaProjects\\mp3player\\songs\\a5.mp3");
-            String ext = FilenameUtils.getExtension(file.getAbsolutePath());
-
             try {
-                if (ext.equals("wav")) {
                     Mp3WavAdapter mp3WavAdapter = new Mp3WavAdapter();
-                    file = mp3WavAdapter.convertWavFileToMp3File(file, target);
-                    contentPaneController.getContentTable().getItems().add(mp3File.createMp3Song(file));
-                } else {
-                    contentPaneController.getContentTable().getItems().add(mp3File.createMp3Song(file));
-                }
+                    Mp3Song mp3Song = mp3WavAdapter.createMp3Song(file);
+                    contentPaneController.getContentTable().getItems().add(mp3Song);
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
                 showMessage("Nie można otworzyc pliku " + file.getName());
