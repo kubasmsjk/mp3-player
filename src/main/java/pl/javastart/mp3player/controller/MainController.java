@@ -1,5 +1,6 @@
 package pl.javastart.mp3player.controller;
 
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,11 +18,12 @@ import pl.javastart.mp3player.mp3.Mp3File;
 import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.mp3.Mp3WavAdapter;
 import pl.javastart.mp3player.player.Mp3Player;
-import org.apache.commons.io.FilenameUtils;
+import pl.javastart.mp3player.player.Mp3PlayerComponent;
 import pl.javastart.mp3player.strategy.ISortStrategy;
 import pl.javastart.mp3player.strategy.SortByAuthorStrategy;
 import pl.javastart.mp3player.strategy.SortByLengthStrategy;
 import pl.javastart.mp3player.strategy.SortByTitleStrategy;
+import pl.javastart.mp3player.templates.MusicLibraryItemProducer;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +49,9 @@ public class MainController {
     private void createPlayer() {
         player = Mp3Player.getInstance();
         ObservableList<Mp3Song> items = contentPaneController.getContentTable().getItems();
-        player.getMp3PlayerComponent().init(items);
+        MusicLibraryItemProducer musicLibraryItemProducer = new MusicLibraryItemProducer(items);
+        Mp3PlayerComponent musicLibrary = musicLibraryItemProducer.createItem();
+        musicLibrary.init(items);
     }
 
     private void configureTableClick() {

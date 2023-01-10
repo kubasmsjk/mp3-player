@@ -7,12 +7,18 @@ import pl.javastart.mp3player.mp3.Mp3Song;
 
 import java.io.File;
 
-public class Mp3PlayerComponent {
+public abstract class Mp3PlayerComponent {
     private ObservableList<Mp3Song> songList;
     private Media media;
     private MediaPlayer mediaPlayer;
 
-    public Mp3PlayerComponent() {}
+    public Mp3PlayerComponent(){
+        filleTemplates(songList);
+    }
+
+    private void filleTemplates(ObservableList<Mp3Song> songList) {
+        this.songList = songList;
+    }
 
     public void init(ObservableList<Mp3Song> songList) {
         this.songList = songList;
