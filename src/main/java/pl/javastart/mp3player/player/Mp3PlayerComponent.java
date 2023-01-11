@@ -7,22 +7,18 @@ import pl.javastart.mp3player.mp3.Mp3Song;
 
 import java.io.File;
 
-public abstract class Mp3PlayerComponent {
-    private ObservableList<Mp3Song> songList;
+public class Mp3PlayerComponent {
+    private static ObservableList<Mp3Song> songList;
     private Media media;
     private MediaPlayer mediaPlayer;
 
-    public Mp3PlayerComponent(){
-        filleTemplates(songList);
-    }
+    public Mp3PlayerComponent() {}
 
-    private void filleTemplates(ObservableList<Mp3Song> songList) {
-        this.songList = songList;
-    }
 
     public void init(ObservableList<Mp3Song> songList) {
         this.songList = songList;
     }
+
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
     }
@@ -53,6 +49,10 @@ public abstract class Mp3PlayerComponent {
         }
     }
 
+    public static void setSongList(ObservableList<Mp3Song> songList) {
+        Mp3PlayerComponent.songList = songList;
+    }
+
     public ObservableList<Mp3Song> getSongList() {
         return songList;
     }
@@ -62,8 +62,8 @@ public abstract class Mp3PlayerComponent {
             mediaPlayer.stop();
         }
         Mp3Song mp3s = songList.get(index);
-        media = new Media(new File(mp3s.getFilePath()).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
+        this.media = new Media(new File(mp3s.getFilePath()).toURI().toString());
+        this.mediaPlayer = new MediaPlayer(media);
         mediaPlayer.statusProperty().addListener((observable, oldStatus, newStatus) -> {
             if (newStatus == MediaPlayer.Status.READY)
                 mediaPlayer.setAutoPlay(true);

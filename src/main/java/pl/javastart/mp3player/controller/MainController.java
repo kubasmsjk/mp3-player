@@ -49,9 +49,12 @@ public class MainController {
     private void createPlayer() {
         player = Mp3Player.getInstance();
         ObservableList<Mp3Song> items = contentPaneController.getContentTable().getItems();
-        MusicLibraryItemProducer musicLibraryItemProducer = new MusicLibraryItemProducer(items);
+        System.out.println(contentPaneController.getContentTable().getItems());
+        MusicLibraryItemProducer musicLibraryItemProducer = MusicLibraryItemProducer.getInstance();
         Mp3PlayerComponent musicLibrary = musicLibraryItemProducer.createItem();
-        musicLibrary.init(items);
+        player.setMp3PlayerComponent(musicLibrary);
+        player.getMp3PlayerComponent().init(items);
+
     }
 
     private void configureTableClick() {
@@ -184,8 +187,12 @@ public class MainController {
             @Override
             public void handle(ActionEvent arg0) {
                 try {
-                    Parent parent = FXMLLoader.load(getClass().getResource("/fxml/playlistCreatorPane.fxml"));
-                    Scene scene = new Scene(parent);
+                    FXMLLoader loader =  new FXMLLoader(getClass().getResource("/fxml/playlistCreatorPane.fxml"));
+                    Parent root = (Parent) loader.load();
+                    PlaylistCreatorController playlistCreatorController = loader.getController();
+
+                    playlistCreatorController.initialize(contentPaneController.getContentTable().getItems());
+                    Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setTitle("Playlist");
                     stage.setScene(scene);
