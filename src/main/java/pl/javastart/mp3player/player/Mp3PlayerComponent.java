@@ -7,8 +7,8 @@ import pl.javastart.mp3player.mp3.Mp3Song;
 
 import java.io.File;
 
-public class Mp3PlayerComponent {
-    private static ObservableList<Mp3Song> songList;
+public abstract class Mp3PlayerComponent {
+    public static ObservableList<Mp3Song> songList;
     private Media media;
     private MediaPlayer mediaPlayer;
 
@@ -16,11 +16,15 @@ public class Mp3PlayerComponent {
 
 
     public void init(ObservableList<Mp3Song> songList) {
-        this.songList = songList;
+        Mp3PlayerComponent.songList = songList;
     }
 
     public MediaPlayer getMediaPlayer() {
         return mediaPlayer;
+    }
+
+    public Media getMedia() {
+        return media;
     }
 
     public void play() {
@@ -53,8 +57,12 @@ public class Mp3PlayerComponent {
         Mp3PlayerComponent.songList = songList;
     }
 
-    public ObservableList<Mp3Song> getSongList() {
+    public static ObservableList<Mp3Song> getSongList() {
         return songList;
+    }
+
+    public static String getSongTitle(int index) {
+        return songList.get(index).getTitle();
     }
 
     public void loadSong(int index) {

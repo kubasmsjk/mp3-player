@@ -3,8 +3,10 @@ package pl.javastart.mp3player.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+
 
 public class ControlPaneController {
     @FXML
@@ -21,9 +23,12 @@ public class ControlPaneController {
 
     @FXML
     private Slider progressSlider;
-
     @FXML
-    private TextField messageTextField;
+    private ImageView soundImageView;
+    @FXML
+    private Text startTimeTextField;
+    @FXML
+    private Text endTimeTextField;
 
     public Button getPreviousButton() {
         return previousButton;
@@ -45,7 +50,17 @@ public class ControlPaneController {
         return progressSlider;
     }
 
-    public TextField getMessageTextField() {
-        return messageTextField;
+    public Text getStartTimeTextField() {
+        return startTimeTextField;
     }
+
+    public Text getEndTimeTextField() {
+        return endTimeTextField;
+    }
+
+public void initialize(){
+        previousButton.setDisable(true);
+        playButton.setDisable(true);
+        nextButton.setDisable(true);
+}
 }

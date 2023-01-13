@@ -12,12 +12,6 @@
             <MenuItem fx:id="dirMenuItem" mnemonicParsing="false" text="Open directory" />
             <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
         </Menu>
-      <Menu mnemonicParsing="false" text="Playlist">
-        <items>
-          <MenuItem fx:id="createPlaylistMenuItem" mnemonicParsing="false" text="Create" />
-            <MenuItem fx:id="deletePlaylistMenuItem" mnemonicParsing="false" text="Delete" />
-        </items>
-      </Menu>
       <Menu fx:id="libraryMenuItem" mnemonicParsing="false" text="Library" />
       <Menu fx:id="sortMenuItem" mnemonicParsing="false" text="Sort">
         <items>

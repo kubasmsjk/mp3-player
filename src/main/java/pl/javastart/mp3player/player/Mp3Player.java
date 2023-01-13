@@ -1,10 +1,8 @@
 package pl.javastart.mp3player.player;
 
-import pl.javastart.mp3player.templates.MusicLibraryItemProducer;
-
 public class Mp3Player {
     private static volatile Mp3Player instance = null;
-    private Mp3PlayerComponent mp3PlayerComponent = new Mp3PlayerComponent();
+    private Mp3PlayerComponent mp3PlayerComponent;
 
     private Mp3Player() {
         if (instance != null) {

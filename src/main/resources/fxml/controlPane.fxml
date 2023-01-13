@@ -3,29 +3,51 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<VBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.ControlPaneController">
+<AnchorPane prefHeight="30.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.ControlPaneController">
    <children>
-      <HBox alignment="CENTER_LEFT">
-          <Button id="prev" fx:id="previousButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="NEVER" />
+      <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <Button id="prev" fx:id="previousButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" HBox.hgrow="NEVER" />
           <ToggleButton id="play" fx:id="playButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="NEVER" />
-          <Button id="next" fx:id="nextButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" HBox.hgrow="NEVER" />
-          <Slider fx:id="volumeSlider" HBox.hgrow="NEVER">
+          <Button id="next" fx:id="nextButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" HBox.hgrow="NEVER" />
+         <ImageView fx:id="soundImageView" fitHeight="15.0" fitWidth="19.0" nodeOrientation="INHERIT" pickOnBounds="true" HBox.hgrow="NEVER">
+            <HBox.margin>
+               <Insets left="6.0" />
+            </HBox.margin>
+            <image>
+               <Image url="@../img/sound.png" />
+            </image>
+         </ImageView>
+          <Slider id="volumeSlider" fx:id="volumeSlider" HBox.hgrow="NEVER">
             <padding>
                <Insets left="10.0" right="10.0" />
             </padding>
          </Slider>
-          <Slider fx:id="progressSlider" HBox.hgrow="ALWAYS">
+         <Text fx:id="startTimeTextField" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </Text>
+          <Slider fx:id="progressSlider" HBox.hgrow="NEVER">
             <padding>
                <Insets left="10.0" right="10.0" />
             </padding>
          </Slider>
+         <Text fx:id="endTimeTextField" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00">
+            <font>
+               <Font size="11.0" />
+            </font>
+         </Text>
+         <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+         </padding>
       </HBox>
-      <TextField fx:id="messageTextField" alignment="CENTER" text="Mp3Player v1.0" editable="false"/>
    </children>
-</VBox>
+</AnchorPane>

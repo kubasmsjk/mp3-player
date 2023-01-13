@@ -7,17 +7,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import pl.javastart.mp3player.mp3.Mp3Song;
 
 public class ContentPaneController {
+    @FXML
+    private ControlPaneController controlPaneController;
+    @FXML
+    private PlayListController playListController;
+    @FXML
+    private TableView<Mp3Song> contentTable;
 
     private static final String TITLE_COLUMN = "Title";
     private static final String AUTHOR_COLUMN = "Autor";
     private static final String ALBUM_COLUMN = "Album";
 
-    @FXML
-    private TableView<Mp3Song> contentTable;
-
-    public TableView<Mp3Song> getContentTable() {
-        return contentTable;
-    }
 
     public void initialize() {
         configureTableColumns();
@@ -39,5 +39,17 @@ public class ContentPaneController {
         contentTable.getColumns().add(titleColumn);
         contentTable.getColumns().add(authorColumn);
         contentTable.getColumns().add(albumColumn);
+    }
+
+    public TableView<Mp3Song> getContentTable() {
+        return contentTable;
+    }
+
+    public ControlPaneController getControlPaneController() {
+        return controlPaneController;
+    }
+
+    public PlayListController getPlayListController() {
+        return playListController;
     }
 }

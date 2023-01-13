@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.MainController">
-    <top>
-        <fx:include fx:id="menuPane" source="menuPane.fxml" />
-    </top>
-    <center>
-        <fx:include fx:id="contentPane" source="contentPane.fxml" />
-    </center>
-    <bottom>
-        <fx:include fx:id="controlPane" source="controlPane.fxml" />
-    </bottom>
-</BorderPane>
+
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.MainController">
+   <children>
+      <BorderPane stylesheets="@../css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <top>
+              <fx:include fx:id="menuPane" source="menuPane.fxml" />
+          </top>
+          <center>
+              <fx:include fx:id="contentPane" source="contentPane.fxml" />
+          </center>
+         <bottom>
+             <TextField fx:id="messageTextField" alignment="CENTER" editable="false" text="Mp3Player v1.0" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

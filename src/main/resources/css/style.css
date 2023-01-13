@@ -6,12 +6,24 @@
     -fx-background-image: url("../img/prev.png");
 }
 
+#volumeSlider .thumb {
+    -fx-pref-height: 10px;
+    -fx-pref-width: 10px;
+}
+
 #next {
     -fx-background-image: url("../img/next.png");
 }
 
-.button,
-.toggle-button {
+#play {
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 80% 80%;
+    -fx-background-color: transparent;
+    -fx-opacity: 40%;
+}
+
+#prev,#next {
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 70% 70%;
@@ -19,8 +31,17 @@
     -fx-opacity: 40%;
 }
 
-.button:hover,
-.toggle-button:hover,
-.toggle-button:selected {
+#play:hover,
+#play:hover,
+#play:selected,
+#prev:hover,
+#prev:hover,
+#prev:selected,
+#next:hover,
+#next:hover,
+#next:selected{
     -fx-opacity: 100%;
+}
+#play:selected{
+    -fx-background-image: url("../img/pause.png");
 }
