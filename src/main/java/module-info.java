@@ -12,4 +12,5 @@ module mp3player {
     exports pl.javastart.mp3player.main to javafx.graphics;
     opens pl.javastart.mp3player.controller to javafx.fxml;
     opens pl.javastart.mp3player.mp3 to javafx.base;
+    opens pl.javastart.mp3player.factoryMethodComponents to javafx.base;
 }

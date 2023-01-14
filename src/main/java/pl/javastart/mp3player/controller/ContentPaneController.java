@@ -10,12 +10,12 @@ public class ContentPaneController {
     @FXML
     private ControlPaneController controlPaneController;
     @FXML
-    private PlayListController playListController;
+    private PlayListPaneController playlistPaneController;
     @FXML
     private TableView<Mp3Song> contentTable;
 
     private static final String TITLE_COLUMN = "Title";
-    private static final String AUTHOR_COLUMN = "Autor";
+    private static final String AUTHOR_COLUMN = "Author";
     private static final String ALBUM_COLUMN = "Album";
 
 
@@ -49,7 +49,7 @@ public class ContentPaneController {
         return controlPaneController;
     }
 
-    public PlayListController getPlayListController() {
-        return playListController;
+    public PlayListPaneController getPlayListPaneController() {
+        return playlistPaneController;
     }
 }

@@ -1,8 +1,8 @@
-package pl.javastart.mp3player.templates;
+package pl.javastart.mp3player.factoryMethodComponents;
 
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
 
-public class MusicLibraryItemProducer implements IMp3PlayerFactory {
+public class MusicLibraryItemProducer implements IMp3PlayerComponentFactory {
     private static volatile MusicLibraryItemProducer instance = null;
 
     private MusicLibraryItemProducer() {
@@ -24,7 +24,7 @@ public class MusicLibraryItemProducer implements IMp3PlayerFactory {
 
     @Override
     public Mp3PlayerComponent createItem() {
-        MusicLibraryItem musicLibraryItem = new MusicLibraryItem();
+        MusicLibraryItem musicLibraryItem = MusicLibraryItem.getInstance();
         musicLibraryItem.assignListOfSongs();
         return musicLibraryItem;
     }

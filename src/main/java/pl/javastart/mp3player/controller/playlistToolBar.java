@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import pl.javastart.mp3player.templates.MusicLibraryItem;
+import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
 
 import java.io.IOException;
 
@@ -29,8 +29,6 @@ public class playlistToolBar {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/playlistCreatorPane.fxml"));
                     Parent root = (Parent) loader.load();
-                    PlaylistCreatorController playlistCreatorController = loader.getController();
-                    playlistCreatorController.initialize(MusicLibraryItem.getSongList());
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setTitle("Playlist");

@@ -1,7 +1,7 @@
-package pl.javastart.mp3player.templates;
+package pl.javastart.mp3player.factoryMethodComponents;
 
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
 
-public interface IMp3PlayerFactory {
+interface IMp3PlayerComponentFactory {
     Mp3PlayerComponent createItem();
 }

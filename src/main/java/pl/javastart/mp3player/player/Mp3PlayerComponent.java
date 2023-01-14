@@ -12,19 +12,7 @@ public abstract class Mp3PlayerComponent {
     private Media media;
     private MediaPlayer mediaPlayer;
 
-    public Mp3PlayerComponent() {}
-
-
-    public void init(ObservableList<Mp3Song> songList) {
-        Mp3PlayerComponent.songList = songList;
-    }
-
-    public MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
-    }
-
-    public Media getMedia() {
-        return media;
+    public Mp3PlayerComponent() {
     }
 
     public void play() {
@@ -37,6 +25,19 @@ public abstract class Mp3PlayerComponent {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.pause();
         }
+    }
+
+    public void loadSong(int index) {
+        if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            mediaPlayer.stop();
+        }
+        Mp3Song mp3s = Mp3PlayerComponent.getSongList().get(index);
+        this.media = new Media(new File(mp3s.getFilePath()).toURI().toString());
+        this.mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.statusProperty().addListener((observable, oldStatus, newStatus) -> {
+            if (newStatus == MediaPlayer.Status.READY)
+                mediaPlayer.setAutoPlay(true);
+        });
     }
 
     public double getLoadedSongLength() {
@@ -53,28 +54,28 @@ public abstract class Mp3PlayerComponent {
         }
     }
 
-    public static void setSongList(ObservableList<Mp3Song> songList) {
-        Mp3PlayerComponent.songList = songList;
+    public static String getSongInformations(int index) {
+        return "Played song \"" + songList.get(index).getTitle() + "\" author: " + songList.get(index).getAuthor();
     }
 
     public static ObservableList<Mp3Song> getSongList() {
         return songList;
     }
 
-    public static String getSongTitle(int index) {
-        return songList.get(index).getTitle();
+    public static void setSongList(ObservableList<Mp3Song> songList) {
+
+        Mp3PlayerComponent.songList = songList;
     }
 
-    public void loadSong(int index) {
-        if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-            mediaPlayer.stop();
-        }
-        Mp3Song mp3s = songList.get(index);
-        this.media = new Media(new File(mp3s.getFilePath()).toURI().toString());
-        this.mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.statusProperty().addListener((observable, oldStatus, newStatus) -> {
-            if (newStatus == MediaPlayer.Status.READY)
-                mediaPlayer.setAutoPlay(true);
-        });
+    public MediaPlayer getMediaPlayer() {
+
+        return mediaPlayer;
     }
+
+    public Media getMedia() {
+
+        return media;
+    }
+
+    protected abstract void assignListOfSongs();
 }

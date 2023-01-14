@@ -1,13 +1,15 @@
 package pl.javastart.mp3player.controller;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
+import pl.javastart.mp3player.factoryMethodComponents.PlaylistItem;
 import pl.javastart.mp3player.mp3.Mp3File;
 import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.mp3.Mp3WavAdapter;
@@ -17,9 +19,10 @@ import pl.javastart.mp3player.strategy.ISortStrategy;
 import pl.javastart.mp3player.strategy.SortByAuthorStrategy;
 import pl.javastart.mp3player.strategy.SortByLengthStrategy;
 import pl.javastart.mp3player.strategy.SortByTitleStrategy;
-import pl.javastart.mp3player.templates.MusicLibraryItemProducer;
+import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItemProducer;
 
 import java.io.File;
+import java.util.Locale;
 
 public class MainController {
 
@@ -30,7 +33,6 @@ public class MainController {
     @FXML
     private TextField messageTextField;
     private Mp3Player player = null;
-    private static ObservableList<Mp3Song> listOfSongs;
     private ISortStrategy strategy;
 
     public void initialize() {
@@ -42,19 +44,19 @@ public class MainController {
 
     private void createPlayer() {
         player = Mp3Player.getInstance();
-        listOfSongs = contentPaneController.getContentTable().getItems();
     }
 
     private void initLibraryAsMp3PlayerComponent() {
         MusicLibraryItemProducer musicLibraryItemProducer = MusicLibraryItemProducer.getInstance();
         Mp3PlayerComponent musicLibrary = musicLibraryItemProducer.createItem();
         player.setMp3PlayerComponent(musicLibrary);
+        contentPaneController.getContentTable().setItems(Mp3PlayerComponent.getSongList());
     }
 
     private void configureTableClick() {
         TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
         contentTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getClickCount() == 2) {
+            if (event.getClickCount() == 2 && ! contentTable.getSelectionModel().getSelectedCells().isEmpty()) {
                 int selectedIndex = contentTable.getSelectionModel().getSelectedIndex();
                 playSelectedSong(selectedIndex);
             }
@@ -66,12 +68,14 @@ public class MainController {
         configureProgressBar();
         configureVolume();
         configureButtons();
-        showMessage(Mp3PlayerComponent.getSongTitle(selectedIndex));
+        showMessage(Mp3PlayerComponent.getSongInformations(selectedIndex));
         contentPaneController.getControlPaneController().getPlayButton().setSelected(true);
     }
 
     private void configureProgressBar() {
         Slider progressSlider = contentPaneController.getControlPaneController().getProgressSlider();
+        StackPane trackPane = (StackPane) progressSlider.lookup(".track");
+
         //ustawienie długości suwaka postępu
         player.getMp3PlayerComponent().getMediaPlayer().setOnReady(() -> {
             progressSlider.setMax(player.getMp3PlayerComponent().getLoadedSongLength());
@@ -81,7 +85,8 @@ public class MainController {
         player.getMp3PlayerComponent().getMediaPlayer().currentTimeProperty().addListener((arg, oldVal, newVal) -> {
                     progressSlider.setValue(newVal.toSeconds());
                     contentPaneController.getControlPaneController().getStartTimeTextField().setText(getSongTimeInMMSS((int) Math.round(newVal.toSeconds())));
-
+                    String style = String.format(Locale.US, "-fx-background-color: linear-gradient(to right, #4c9639 %d%%, #7c7c7c %d%%);", (int) ((100 * newVal.toSeconds()) / progressSlider.getMax()), (int) ((100 * newVal.toSeconds()) / progressSlider.getMax()));
+                    trackPane.setStyle(style);
                 }
         );
         //przesunięcie suwaka spowoduje przewinięcie piosenki do wskazanego miejsca
@@ -103,12 +108,16 @@ public class MainController {
         Slider volumeSlider = contentPaneController.getControlPaneController().getVolumeSlider();
         volumeSlider.valueProperty().unbind();
         volumeSlider.setMax(1.0);
+        player.getMp3PlayerComponent().setVolume(0.5);
         volumeSlider.valueProperty().bindBidirectional(player.getMp3PlayerComponent().getMediaPlayer().volumeProperty());
     }
 
     private void configureButtons() {
         TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
+        TableView<PlaylistItem> playlistItemTableView = contentPaneController.getPlayListPaneController().getContentTable();
         ToggleButton playButton = contentPaneController.getControlPaneController().getPlayButton();
+
+
         Button prevButton = contentPaneController.getControlPaneController().getPreviousButton();
         Button nextButton = contentPaneController.getControlPaneController().getNextButton();
 
@@ -119,8 +128,10 @@ public class MainController {
         playButton.setOnAction(event -> {
             if (playButton.isSelected()) {
                 player.getMp3PlayerComponent().play();
+                showMessage(Mp3PlayerComponent.getSongInformations(contentTable.getSelectionModel().getSelectedIndex()));
             } else {
                 player.getMp3PlayerComponent().stop();
+                showMessage("Song paused");
             }
         });
 
@@ -133,6 +144,17 @@ public class MainController {
             contentTable.getSelectionModel().select(contentTable.getSelectionModel().getSelectedIndex() - 1);
             playSelectedSong(contentTable.getSelectionModel().getSelectedIndex());
         });
+
+        playlistItemTableView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                if (!contentTable.getSelectionModel().getSelectedCells().isEmpty()) {
+
+                    PlaylistItem playlistItem = playlistItemTableView.getSelectionModel().getSelectedItem();
+                    contentPaneController.getContentTable().setItems(playlistItem.getPlaylistSongs());
+                    player.setMp3PlayerComponent(playlistItem);
+
+                }
+            });
+
     }
 
     private void configureMenu() {
@@ -151,7 +173,7 @@ public class MainController {
             try {
                 Mp3WavAdapter mp3WavAdapter = new Mp3WavAdapter();
                 Mp3Song mp3Song = mp3WavAdapter.createMp3Song(file);
-                contentPaneController.getContentTable().getItems().add(mp3Song);
+                MusicLibraryItem.getSongList().add(mp3Song);
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
                 showMessage("Nie można otworzyc pliku " + file.getName());
@@ -205,8 +227,4 @@ public class MainController {
         messageTextField.setText(message);
     }
 
-
-    public static ObservableList<Mp3Song> getListOfSongs() {
-        return listOfSongs;
-    }
 }

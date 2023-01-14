@@ -6,13 +6,13 @@
     -fx-background-image: url("../img/prev.png");
 }
 
+#next {
+    -fx-background-image: url("../img/next.png");
+}
+
 #volumeSlider .thumb {
     -fx-pref-height: 10px;
     -fx-pref-width: 10px;
-}
-
-#next {
-    -fx-background-image: url("../img/next.png");
 }
 
 #play {
@@ -23,7 +23,7 @@
     -fx-opacity: 40%;
 }
 
-#prev,#next {
+#prev, #next {
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-size: 70% 70%;
@@ -39,9 +39,10 @@
 #prev:selected,
 #next:hover,
 #next:hover,
-#next:selected{
+#next:selected {
     -fx-opacity: 100%;
 }
-#play:selected{
+
+#play:selected {
     -fx-background-image: url("../img/pause.png");
 }
