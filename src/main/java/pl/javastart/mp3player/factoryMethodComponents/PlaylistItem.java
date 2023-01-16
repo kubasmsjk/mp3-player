@@ -19,7 +19,6 @@ public class PlaylistItem extends Mp3PlayerComponent {
 
     @Override
     protected void assignListOfSongs() {
-
     }
 
     public void setPlaylistSongs(ObservableList<Mp3Song> playlistSongs) {

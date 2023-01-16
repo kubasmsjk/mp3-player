@@ -8,11 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
 
 import java.io.IOException;
 
-public class playlistToolBar {
+public class PlaylistToolBarPaneController {
 
     @FXML
     private Button addButton;
@@ -40,5 +39,13 @@ public class playlistToolBar {
                 }
             }
         });
+    }
+
+    public Button getDeleteButton() {
+        return deleteButton;
+    }
+
+    public Button getEditButton() {
+        return editButton;
     }
 }

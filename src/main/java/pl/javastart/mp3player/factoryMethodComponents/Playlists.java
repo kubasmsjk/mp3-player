@@ -4,7 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Playlists {
-    private ObservableList<PlaylistItem> playlists = FXCollections.observableArrayList();
+    private final ObservableList<PlaylistItem> playlists = FXCollections.observableArrayList();
 
     private static volatile Playlists instance = null;
 

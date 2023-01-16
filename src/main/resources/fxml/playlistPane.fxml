@@ -6,14 +6,14 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.PlayListPaneController">
    <children>
-      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" >
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TableView fx:id="contentTable" prefWidth="178.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <fx:include fx:id="playlistToolBar" source="playlistToolBarPane.fxml" />
+            <fx:include fx:id="playlistToolBarPane" source="playlistToolBarPane.fxml" />
          </children>
       </VBox>
    </children>

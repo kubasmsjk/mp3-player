@@ -5,14 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
-import javafx.stage.Stage;
+import pl.javastart.mp3player.command.CreateCommand;
 import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
-import pl.javastart.mp3player.factoryMethodComponents.Playlists;
 import pl.javastart.mp3player.mp3.Mp3Song;
-import pl.javastart.mp3player.player.Mp3PlayerComponent;
-import pl.javastart.mp3player.factoryMethodComponents.PlaylistItemProducer;
 
-import java.util.Objects;
 
 public class PlaylistCreatorController {
     @FXML
@@ -89,18 +85,8 @@ public class PlaylistCreatorController {
     //stworzenie playlisty
     private void createPlaylist() {
         createButton.setOnAction(event -> {
-            nameTextField.setText(nameTextField.getText());
-            if (!Objects.equals(nameTextField.getText(), "")) {
-                PlaylistItemProducer playlistItemProducer = new PlaylistItemProducer();
-                Mp3PlayerComponent playlist = playlistItemProducer.createItem();
-                playlistItemProducer.getPlaylistItem().setPlaylistSongs(playlistTable.getItems());
-                playlistItemProducer.getPlaylistItem().setName(nameTextField.getText());
-                Playlists.getInstance().getPlaylists().add(playlistItemProducer.getPlaylistItem());
-
-                ((Stage) createButton.getScene().getWindow()).close();
-            }
+            new CreateCommand(playlistTable, nameTextField, createButton).execute();
         });
-
     }
 
 }

@@ -8,6 +8,8 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import pl.javastart.mp3player.command.DeleteCommand;
+import pl.javastart.mp3player.command.EditCommand;
 import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
 import pl.javastart.mp3player.factoryMethodComponents.PlaylistItem;
 import pl.javastart.mp3player.mp3.Mp3File;
@@ -41,6 +43,7 @@ public class MainController {
         initLibraryAsMp3PlayerComponent();
         configureTableClick();
         configureMenu();
+        configurePlaylistButtons();
     }
 
     //Stworzenie instacji odtwarzacza (Singleton)
@@ -76,6 +79,7 @@ public class MainController {
                 player.setMp3PlayerComponent(playlistItem);
             }
         });
+
     }
 
     //metoda ustawiająca kontrolki odtwarzacza i wywołująca granie piosenki przez odwarzacz
@@ -164,6 +168,7 @@ public class MainController {
             playSelectedSong(contentTable.getSelectionModel().getSelectedIndex());
         });
 
+
     }
 
     //konfiguracja paska menu
@@ -230,10 +235,26 @@ public class MainController {
             defaultControls();
             initLibraryAsMp3PlayerComponent();
         });
-
     }
-    private void defaultControls(){
-        if(player.getMp3PlayerComponent().getMediaPlayer() != null){
+
+    private void configurePlaylistButtons() {
+        TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
+        TableView<PlaylistItem> playlistTable = contentPaneController.getPlayListPaneController().getContentTable();
+        Button delete = contentPaneController.getPlayListPaneController().getPlaylistToolBarPaneController().getDeleteButton();
+        Button edit = contentPaneController.getPlayListPaneController().getPlaylistToolBarPaneController().getEditButton();
+
+        delete.setOnAction(event -> {
+            new DeleteCommand(playlistTable, contentTable, delete).execute();
+        });
+
+        edit.setOnAction(event -> {
+            new EditCommand(playlistTable, contentTable, edit).execute();
+        });
+    }
+
+    //ustawia przyciski oraz stopuje piosenke przy przejsciu do innej listy
+    private void defaultControls() {
+        if (player.getMp3PlayerComponent().getMediaPlayer() != null) {
             player.getMp3PlayerComponent().getMediaPlayer().stop();
             showMessage("Mp3Player v1.0");
             ToggleButton playButton = contentPaneController.getControlPaneController().getPlayButton();
@@ -245,6 +266,8 @@ public class MainController {
             nextButton.setDisable(true);
         }
     }
+
+    //pokazuje wiadomość w oknie na dole odtwarzacza
     private void showMessage(String message) {
         messageTextField.setText(message);
     }
