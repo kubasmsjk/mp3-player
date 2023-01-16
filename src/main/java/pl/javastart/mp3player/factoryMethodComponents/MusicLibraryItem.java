@@ -2,7 +2,6 @@ package pl.javastart.mp3player.factoryMethodComponents;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pl.javastart.mp3player.controller.MainController;
 import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
 

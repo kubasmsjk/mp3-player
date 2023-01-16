@@ -21,6 +21,7 @@ public class playlistToolBar {
     @FXML
     private Button editButton;
 
+    //inicjalizacja widoku
     public void initialize() {
 
         addButton.setOnAction(new EventHandler<>() {

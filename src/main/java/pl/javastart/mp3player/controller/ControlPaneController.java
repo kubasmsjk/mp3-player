@@ -58,9 +58,10 @@ public class ControlPaneController {
         return endTimeTextField;
     }
 
-public void initialize(){
+    //inicjalizacja widoku
+    public void initialize() {
         previousButton.setDisable(true);
         playButton.setDisable(true);
         nextButton.setDisable(true);
-}
+    }
 }

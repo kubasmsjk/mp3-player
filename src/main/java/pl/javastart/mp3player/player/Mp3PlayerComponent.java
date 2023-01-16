@@ -12,21 +12,21 @@ public abstract class Mp3PlayerComponent {
     private Media media;
     private MediaPlayer mediaPlayer;
 
-    public Mp3PlayerComponent() {
-    }
-
+    //zagraj piosenke
     public void play() {
         if (mediaPlayer != null && (mediaPlayer.getStatus() == MediaPlayer.Status.READY || mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED)) {
             mediaPlayer.play();
         }
     }
 
+    //zastopuj piosenkę
     public void stop() {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.pause();
         }
     }
 
+    //załaduj piosenkę
     public void loadSong(int index) {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.stop();
@@ -40,6 +40,7 @@ public abstract class Mp3PlayerComponent {
         });
     }
 
+    //pobierz długośc trwania piosenki
     public double getLoadedSongLength() {
         if (media != null) {
             return media.getDuration().toSeconds();
@@ -48,32 +49,32 @@ public abstract class Mp3PlayerComponent {
         }
     }
 
+    //ustaw głośność
     public void setVolume(double volume) {
         if (mediaPlayer != null) {
             mediaPlayer.setVolume(volume);
         }
     }
 
+    //pobierz informację o piosencę
     public static String getSongInformations(int index) {
         return "Played song \"" + songList.get(index).getTitle() + "\" author: " + songList.get(index).getAuthor();
     }
 
+    //pobierz aktualną listę piosenek
     public static ObservableList<Mp3Song> getSongList() {
         return songList;
     }
 
     public static void setSongList(ObservableList<Mp3Song> songList) {
-
         Mp3PlayerComponent.songList = songList;
     }
 
     public MediaPlayer getMediaPlayer() {
-
         return mediaPlayer;
     }
 
     public Media getMedia() {
-
         return media;
     }
 

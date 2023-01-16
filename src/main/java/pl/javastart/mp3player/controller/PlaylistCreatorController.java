@@ -7,7 +7,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
 import javafx.stage.Stage;
 import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
-import pl.javastart.mp3player.factoryMethodComponents.PlaylistItem;
 import pl.javastart.mp3player.factoryMethodComponents.Playlists;
 import pl.javastart.mp3player.mp3.Mp3Song;
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
@@ -33,6 +32,7 @@ public class PlaylistCreatorController {
     private static final String AUTHOR_COLUMN = "Author";
     private static final String ALBUM_COLUMN = "Album";
 
+    //inicjalizacja widoku
     public void initialize() {
         createButton.setDisable(true);
         libraryLabel.setText("Library");
@@ -44,6 +44,7 @@ public class PlaylistCreatorController {
         createPlaylist();
     }
 
+    //konfiguracja kolumn tabeli
     private void configureTableColumns(TableView<Mp3Song> table) {
         TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -56,11 +57,13 @@ public class PlaylistCreatorController {
         TableColumn<Mp3Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
         albumColumn.setSortable(false);
+
         table.getColumns().add(titleColumn);
         table.getColumns().add(authorColumn);
         table.getColumns().add(albumColumn);
     }
 
+    //konfiguracja kliknięć tabeli
     private void configureTableClick() {
         libraryTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (!libraryTable.getSelectionModel().getSelectedCells().isEmpty()) {
@@ -83,10 +86,11 @@ public class PlaylistCreatorController {
         });
     }
 
+    //stworzenie playlisty
     private void createPlaylist() {
         createButton.setOnAction(event -> {
             nameTextField.setText(nameTextField.getText());
-            if(!Objects.equals(nameTextField.getText(), "")){
+            if (!Objects.equals(nameTextField.getText(), "")) {
                 PlaylistItemProducer playlistItemProducer = new PlaylistItemProducer();
                 Mp3PlayerComponent playlist = playlistItemProducer.createItem();
                 playlistItemProducer.getPlaylistItem().setPlaylistSongs(playlistTable.getItems());
@@ -95,7 +99,6 @@ public class PlaylistCreatorController {
 
                 ((Stage) createButton.getScene().getWindow()).close();
             }
-
         });
 
     }

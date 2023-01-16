@@ -18,11 +18,12 @@ public class ContentPaneController {
     private static final String AUTHOR_COLUMN = "Author";
     private static final String ALBUM_COLUMN = "Album";
 
-
+    //inicjalizacja widoku
     public void initialize() {
         configureTableColumns();
     }
 
+    //konfiguracja kolumn tabeli
     private void configureTableColumns() {
         TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));

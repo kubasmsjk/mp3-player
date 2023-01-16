@@ -5,23 +5,29 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.MenuPaneController">
-    <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.javastart.mp3player.controller.MenuPaneController">
+    <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+             AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" text="Open Mp3 File" />
-            <MenuItem fx:id="dirMenuItem" mnemonicParsing="false" text="Open directory" />
-            <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close" />
+            <MenuItem fx:id="fileMenuItem" mnemonicParsing="false" text="Open Mp3 File"/>
+            <MenuItem fx:id="dirMenuItem" mnemonicParsing="false" text="Open directory"/>
+            <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" text="Close"/>
         </Menu>
-      <Menu fx:id="libraryMenuItem" mnemonicParsing="false" text="Library" />
-      <Menu fx:id="sortMenuItem" mnemonicParsing="false" text="Sort">
-        <items>
-          <MenuItem fx:id="sortByTitleMenuItem" mnemonicParsing="false" text="Sort by title" />
-            <MenuItem fx:id="sortByAuthorMenuItem" mnemonicParsing="false" text="Sort by author" />
-            <MenuItem fx:id="sortByLengthMenuItem" mnemonicParsing="false" text="Sort by length" />
-        </items>
-      </Menu>
+        <Menu fx:id="libraryMenu" mnemonicParsing="false" text="Library">
+            <items>
+                <MenuItem fx:id="libraryMenuItem" mnemonicParsing="false" text="Back to Library"/>
+                <Menu fx:id="sortMenuItem" mnemonicParsing="false" text="Sort">
+                    <items>
+                        <MenuItem fx:id="sortByTitleMenuItem" mnemonicParsing="false" text="Sort by title"/>
+                        <MenuItem fx:id="sortByAuthorMenuItem" mnemonicParsing="false" text="Sort by author"/>
+                        <MenuItem fx:id="sortByLengthMenuItem" mnemonicParsing="false" text="Sort by length"/>
+                    </items>
+                </Menu>
+            </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About" />
+            <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" text="About"/>
         </Menu>
     </MenuBar>
 </AnchorPane>

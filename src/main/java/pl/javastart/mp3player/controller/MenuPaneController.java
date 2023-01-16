@@ -16,18 +16,20 @@ import java.util.Objects;
 
 public class MenuPaneController {
     @FXML
-    private MenuItem fileMenuItem, dirMenuItem, closeMenuItem, aboutMenuItem;
+    private MenuItem fileMenuItem, dirMenuItem, closeMenuItem, libraryMenuItem, aboutMenuItem;
     @FXML
-    private Menu libraryMenuItem;
+    private Menu libraryMenu;
     @FXML
     private Menu sortMenuItem;
     @FXML
     private MenuItem sortByAuthorMenuItem, sortByLengthMenuItem, sortByTitleMenuItem;
 
+    //inicjalizacja widoku
     public void initialize() {
         configureMenu();
     }
 
+    //konfiguracja menu
     private void configureMenu() {
 
         aboutMenuItem.setOnAction(new EventHandler<>() {
@@ -57,7 +59,11 @@ public class MenuPaneController {
         return dirMenuItem;
     }
 
-    public Menu getLibraryMenuItem() {
+    public Menu getLibraryMenu() {
+        return libraryMenu;
+    }
+
+    public MenuItem getLibraryMenuItem() {
         return libraryMenuItem;
     }
 

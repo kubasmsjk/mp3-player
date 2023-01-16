@@ -35,6 +35,7 @@ public class MainController {
     private Mp3Player player = null;
     private ISortStrategy strategy;
 
+    //zainicjalizowanie widoku
     public void initialize() {
         createPlayer();
         initLibraryAsMp3PlayerComponent();
@@ -42,10 +43,12 @@ public class MainController {
         configureMenu();
     }
 
+    //Stworzenie instacji odtwarzacza (Singleton)
     private void createPlayer() {
         player = Mp3Player.getInstance();
     }
 
+    //stworzenie biblioteki (Metoda Fabrykująca) i podpięcie listy piosenek pod tablicę
     private void initLibraryAsMp3PlayerComponent() {
         MusicLibraryItemProducer musicLibraryItemProducer = MusicLibraryItemProducer.getInstance();
         Mp3PlayerComponent musicLibrary = musicLibraryItemProducer.createItem();
@@ -53,16 +56,29 @@ public class MainController {
         contentPaneController.getContentTable().setItems(Mp3PlayerComponent.getSongList());
     }
 
+    //konfiguracja kliknieć w wiersze tabeli
     private void configureTableClick() {
         TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
+        TableView<PlaylistItem> playlistItemTable = contentPaneController.getPlayListPaneController().getContentTable();
+
         contentTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getClickCount() == 2 && ! contentTable.getSelectionModel().getSelectedCells().isEmpty()) {
+            if (event.getClickCount() == 2 && !contentTable.getSelectionModel().getSelectedCells().isEmpty()) {
                 int selectedIndex = contentTable.getSelectionModel().getSelectedIndex();
                 playSelectedSong(selectedIndex);
             }
         });
+
+        playlistItemTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (!playlistItemTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                defaultControls();
+                PlaylistItem playlistItem = playlistItemTable.getSelectionModel().getSelectedItem();
+                contentPaneController.getContentTable().setItems(playlistItem.getPlaylistSongs());
+                player.setMp3PlayerComponent(playlistItem);
+            }
+        });
     }
 
+    //metoda ustawiająca kontrolki odtwarzacza i wywołująca granie piosenki przez odwarzacz
     private void playSelectedSong(int selectedIndex) {
         player.getMp3PlayerComponent().loadSong(selectedIndex);
         configureProgressBar();
@@ -72,6 +88,7 @@ public class MainController {
         contentPaneController.getControlPaneController().getPlayButton().setSelected(true);
     }
 
+    //konfiguracja pasku postępu piosenki
     private void configureProgressBar() {
         Slider progressSlider = contentPaneController.getControlPaneController().getProgressSlider();
         StackPane trackPane = (StackPane) progressSlider.lookup(".track");
@@ -81,6 +98,7 @@ public class MainController {
             progressSlider.setMax(player.getMp3PlayerComponent().getLoadedSongLength());
             contentPaneController.getControlPaneController().getEndTimeTextField().setText(getSongTimeInMMSS((int) Math.round(player.getMp3PlayerComponent().getLoadedSongLength())));
         });
+
         //zmiana czasu w odtwarzaczu automatycznie będzie aktualizowała suwak
         player.getMp3PlayerComponent().getMediaPlayer().currentTimeProperty().addListener((arg, oldVal, newVal) -> {
                     progressSlider.setValue(newVal.toSeconds());
@@ -89,6 +107,7 @@ public class MainController {
                     trackPane.setStyle(style);
                 }
         );
+
         //przesunięcie suwaka spowoduje przewinięcie piosenki do wskazanego miejsca
         progressSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (progressSlider.isValueChanging()) {
@@ -98,12 +117,14 @@ public class MainController {
         });
     }
 
+    //obliczenie minut i sekund piosenki
     private String getSongTimeInMMSS(int loadedSongLength) {
         int MM = (loadedSongLength % 3600) / 60;
         int SS = loadedSongLength % 60;
         return String.format("%02d:%02d", MM, SS);
     }
 
+    //konfiguracja głosności
     private void configureVolume() {
         Slider volumeSlider = contentPaneController.getControlPaneController().getVolumeSlider();
         volumeSlider.valueProperty().unbind();
@@ -112,12 +133,10 @@ public class MainController {
         volumeSlider.valueProperty().bindBidirectional(player.getMp3PlayerComponent().getMediaPlayer().volumeProperty());
     }
 
+    //konfiguracja przycisków odtwarzacza
     private void configureButtons() {
         TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
-        TableView<PlaylistItem> playlistItemTableView = contentPaneController.getPlayListPaneController().getContentTable();
         ToggleButton playButton = contentPaneController.getControlPaneController().getPlayButton();
-
-
         Button prevButton = contentPaneController.getControlPaneController().getPreviousButton();
         Button nextButton = contentPaneController.getControlPaneController().getNextButton();
 
@@ -145,18 +164,9 @@ public class MainController {
             playSelectedSong(contentTable.getSelectionModel().getSelectedIndex());
         });
 
-        playlistItemTableView.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                if (!contentTable.getSelectionModel().getSelectedCells().isEmpty()) {
-
-                    PlaylistItem playlistItem = playlistItemTableView.getSelectionModel().getSelectedItem();
-                    contentPaneController.getContentTable().setItems(playlistItem.getPlaylistSongs());
-                    player.setMp3PlayerComponent(playlistItem);
-
-                }
-            });
-
     }
 
+    //konfiguracja paska menu
     private void configureMenu() {
         MenuItem openFile = menuPaneController.getFileMenuItem();
         MenuItem openDir = menuPaneController.getDirMenuItem();
@@ -176,8 +186,8 @@ public class MainController {
                 MusicLibraryItem.getSongList().add(mp3Song);
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
-                showMessage("Nie można otworzyc pliku " + file.getName());
-                System.out.println(e.getMessage());
+                showMessage("Nie można otworzyc pliku ");
+
             }
         });
 
@@ -197,32 +207,44 @@ public class MainController {
             String id = menuItem.getId();
 
             switch (id) {
-                case "sortByTitleMenuItem":
+                case "sortByTitleMenuItem" -> {
                     strategy = new SortByTitleStrategy();
                     strategy.sort(Mp3PlayerComponent.getSongList());
-                    break;
-                case "sortByAuthorMenuItem":
+                }
+                case "sortByAuthorMenuItem" -> {
                     strategy = new SortByAuthorStrategy();
                     strategy.sort(Mp3PlayerComponent.getSongList());
-                    break;
-                case "sortByLengthMenuItem":
+                }
+                case "sortByLengthMenuItem" -> {
                     strategy = new SortByLengthStrategy();
                     strategy.sort(Mp3PlayerComponent.getSongList());
-                    break;
-                default:
+                }
+                default -> {
                     strategy = new SortByTitleStrategy();
                     strategy.sort(Mp3PlayerComponent.getSongList());
-                    break;
+                }
             }
         });
 
         musicLibrary.setOnAction(event -> {
-
+            defaultControls();
+            initLibraryAsMp3PlayerComponent();
         });
 
-
     }
-
+    private void defaultControls(){
+        if(player.getMp3PlayerComponent().getMediaPlayer() != null){
+            player.getMp3PlayerComponent().getMediaPlayer().stop();
+            showMessage("Mp3Player v1.0");
+            ToggleButton playButton = contentPaneController.getControlPaneController().getPlayButton();
+            Button prevButton = contentPaneController.getControlPaneController().getPreviousButton();
+            Button nextButton = contentPaneController.getControlPaneController().getNextButton();
+            playButton.setSelected(false);
+            playButton.setDisable(true);
+            prevButton.setDisable(true);
+            nextButton.setDisable(true);
+        }
+    }
     private void showMessage(String message) {
         messageTextField.setText(message);
     }
