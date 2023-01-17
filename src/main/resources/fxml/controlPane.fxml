@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="30.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.ControlPaneController">
+<AnchorPane prefHeight="30.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.ztp.mp3player.controller.ControlPaneController">
    <children>
       <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <Button id="prev" fx:id="previousButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" HBox.hgrow="NEVER" />

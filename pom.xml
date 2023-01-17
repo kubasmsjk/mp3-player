@@ -41,12 +41,6 @@
             <artifactId>jid3lib</artifactId>
             <version>${jid3lib.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/de.sciss/jump3r -->
-        <dependency>
-            <groupId>de.sciss</groupId>
-            <artifactId>jump3r</artifactId>
-            <version>1.0.5</version>
-        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -57,7 +51,11 @@
             <artifactId>jaudiotagger</artifactId>
             <version>3.0.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.javastart.mp3player.controller.PlaylistToolBarPaneController">
+<AnchorPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.ztp.mp3player.controller.PlaylistToolBarPaneController">
    <children>
       <HBox alignment="CENTER" spacing="7.0">
          <children>
