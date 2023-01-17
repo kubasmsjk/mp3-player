@@ -19,8 +19,6 @@ public class DeleteCommand extends Command<PlaylistItem> {
         getPlaylistItemTableView().getItems().remove(selectedItem);
         Mp3Player.getInstance().setMp3PlayerComponent(MusicLibraryItem.getInstance());
         getContentTableView().setItems(Mp3PlayerComponent.getSongList());
-        if (getPlaylistItemTableView().getSelectionModel().isEmpty()) {
-            getButton().setDisable(true);
-        }
+        getButton().setDisable(true);
     }
 }

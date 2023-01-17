@@ -11,6 +11,10 @@ public abstract class Command<T> implements IMp3Command<T> {
     private TextField nameTextField;
     private Button button;
 
+    public Command(TableView<Mp3Song> contentTableView) {
+        this.contentTableView = contentTableView;
+    }
+
     public Command(TableView<T> playlistItemTableView, TextField nameTextField, Button button) {
         this.playlistItemTableView = playlistItemTableView;
         this.nameTextField = nameTextField;

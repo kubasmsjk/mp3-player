@@ -14,7 +14,7 @@ import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
 import pl.javastart.mp3player.factoryMethodComponents.PlaylistItem;
 import pl.javastart.mp3player.mp3.Mp3File;
 import pl.javastart.mp3player.mp3.Mp3Song;
-import pl.javastart.mp3player.mp3.Mp3WavAdapter;
+import pl.javastart.mp3player.mp3.FileMetadataFacade;
 import pl.javastart.mp3player.player.Mp3Player;
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
 import pl.javastart.mp3player.strategy.ISortStrategy;
@@ -178,16 +178,13 @@ public class MainController {
         MenuItem musicLibrary = menuPaneController.getLibraryMenuItem();
         Menu sortMenuItem = menuPaneController.getSortMenuItem();
 
-        //USUNAC PRZY ADAPTERZE
-        Mp3File mp3File = new Mp3File();
-
         openFile.setOnAction(event -> {
             FileChooser fc = new FileChooser();
             fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Mp3", "*.mp3", "*.wav"));
             File file = fc.showOpenDialog(new Stage());
             try {
-                Mp3WavAdapter mp3WavAdapter = new Mp3WavAdapter();
-                Mp3Song mp3Song = mp3WavAdapter.createMp3Song(file);
+                FileMetadataFacade metadataFacade = new FileMetadataFacade();
+                Mp3Song mp3Song = metadataFacade.createSong(file);
                 MusicLibraryItem.getSongList().add(mp3Song);
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
@@ -196,16 +193,16 @@ public class MainController {
             }
         });
 
-        openDir.setOnAction(event -> {
-            DirectoryChooser dc = new DirectoryChooser();
-            File dir = dc.showDialog(new Stage());
-            try {
-                contentPaneController.getContentTable().getItems().addAll(mp3File.createMp3List(dir));
-                showMessage("Wczytano dane z folderu " + dir.getName());
-            } catch (Exception e) {
-                showMessage("Wystąpil blad podczas odczytu folderu");
-            }
-        });
+        //openDir.setOnAction(event -> {
+        //    DirectoryChooser dc = new DirectoryChooser();
+        //    File dir = dc.showDialog(new Stage());
+        //    try {
+        //        contentPaneController.getContentTable().getItems().addAll(mp3File.createMp3List(dir));
+        //        showMessage("Wczytano dane z folderu " + dir.getName());
+        //    } catch (Exception e) {
+        //        showMessage("Wystąpil blad podczas odczytu folderu");
+        //    }
+        //});
 
         sortMenuItem.setOnAction(event -> {
             MenuItem menuItem = (MenuItem) event.getTarget();
@@ -254,12 +251,17 @@ public class MainController {
 
     //ustawia przyciski oraz stopuje piosenke przy przejsciu do innej listy
     private void defaultControls() {
+        //Button delete = contentPaneController.getPlayListPaneController().getPlaylistToolBarPaneController().getDeleteButton();
+        //Button edit = contentPaneController.getPlayListPaneController().getPlaylistToolBarPaneController().getEditButton();
+        //delete.setDisable(false);
+        //edit.setDisable(false);
         if (player.getMp3PlayerComponent().getMediaPlayer() != null) {
             player.getMp3PlayerComponent().getMediaPlayer().stop();
             showMessage("Mp3Player v1.0");
             ToggleButton playButton = contentPaneController.getControlPaneController().getPlayButton();
             Button prevButton = contentPaneController.getControlPaneController().getPreviousButton();
             Button nextButton = contentPaneController.getControlPaneController().getNextButton();
+
             playButton.setSelected(false);
             playButton.setDisable(true);
             prevButton.setDisable(true);

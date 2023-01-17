@@ -5,12 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
+import javafx.scene.layout.VBox;
 import pl.javastart.mp3player.command.CreateCommand;
 import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
 import pl.javastart.mp3player.mp3.Mp3Song;
 
 
 public class PlaylistCreatorController {
+    @FXML
+    private VBox contentVBox;
     @FXML
     private Label libraryLabel;
     @FXML
@@ -89,4 +92,31 @@ public class PlaylistCreatorController {
         });
     }
 
+    public VBox getContentVBox() {
+        return contentVBox;
+    }
+
+    public TableView<Mp3Song> getLibraryTable() {
+        return libraryTable;
+    }
+
+    public TableView<Mp3Song> getPlaylistTable() {
+        return playlistTable;
+    }
+
+    public Label getLibraryLabel() {
+        return libraryLabel;
+    }
+
+    public Label getPlaylistLabel() {
+        return playlistLabel;
+    }
+
+    public Button getCreateButton() {
+        return createButton;
+    }
+
+    public TextField getNameTextField() {
+        return nameTextField;
+    }
 }
