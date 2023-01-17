@@ -5,7 +5,7 @@ import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 
 public class FileMetadataFacade {
-    public Mp3Song createSong(File file) {
+    public Song createSong(File file) {
         String ext = FilenameUtils.getExtension(file.getAbsolutePath());
         if (ext.equals("mp3")) {
             Mp3File mp3File = new Mp3File(file);

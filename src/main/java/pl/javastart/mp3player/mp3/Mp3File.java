@@ -25,7 +25,7 @@ public class Mp3File {
         }
     }
 
-    public Mp3Song getSongWithMetadata() {
+    public Song getSongWithMetadata() {
         AudioFile f;
         try {
             f = AudioFileIO.read(file);
@@ -40,7 +40,7 @@ public class Mp3File {
         String author = mp3File.getID3v2Tag().getLeadArtist();
         String album = mp3File.getID3v2Tag().getAlbumTitle();
         int duration = f.getAudioHeader().getTrackLength();
-        return new Mp3Song(title, author, album, duration, absolutePath);
+        return new Song(title, author, album, duration, absolutePath);
     }
 
 

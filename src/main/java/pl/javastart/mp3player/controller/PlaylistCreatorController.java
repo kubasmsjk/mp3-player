@@ -8,7 +8,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import pl.javastart.mp3player.command.CreateCommand;
 import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 
 
 public class PlaylistCreatorController {
@@ -19,9 +19,9 @@ public class PlaylistCreatorController {
     @FXML
     private Label playlistLabel;
     @FXML
-    private TableView<Mp3Song> libraryTable;
+    private TableView<Song> libraryTable;
     @FXML
-    private TableView<Mp3Song> playlistTable;
+    private TableView<Song> playlistTable;
     @FXML
     private Button createButton;
     @FXML
@@ -44,16 +44,16 @@ public class PlaylistCreatorController {
     }
 
     //konfiguracja kolumn tabeli
-    private void configureTableColumns(TableView<Mp3Song> table) {
-        TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
+    private void configureTableColumns(TableView<Song> table) {
+        TableColumn<Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.setSortable(false);
 
-        TableColumn<Mp3Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
+        TableColumn<Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setSortable(false);
 
-        TableColumn<Mp3Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
+        TableColumn<Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
         albumColumn.setSortable(false);
 
@@ -66,18 +66,18 @@ public class PlaylistCreatorController {
     private void configureTableClick() {
         libraryTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (!libraryTable.getSelectionModel().getSelectedCells().isEmpty()) {
-                Mp3Song mp3Song = libraryTable.getSelectionModel().getSelectedItem();
-                playlistTable.getItems().add(mp3Song);
-                libraryTable.getItems().remove(mp3Song);
+                Song song = libraryTable.getSelectionModel().getSelectedItem();
+                playlistTable.getItems().add(song);
+                libraryTable.getItems().remove(song);
                 createButton.setDisable(false);
             }
         });
 
         playlistTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             if (!playlistTable.getSelectionModel().getSelectedCells().isEmpty()) {
-                Mp3Song mp3Song = playlistTable.getSelectionModel().getSelectedItem();
-                libraryTable.getItems().add(mp3Song);
-                playlistTable.getItems().remove(mp3Song);
+                Song song = playlistTable.getSelectionModel().getSelectedItem();
+                libraryTable.getItems().add(song);
+                playlistTable.getItems().remove(song);
                 if (playlistTable.getItems().size() == 0) {
                     createButton.setDisable(true);
                 }
@@ -96,11 +96,11 @@ public class PlaylistCreatorController {
         return contentVBox;
     }
 
-    public TableView<Mp3Song> getLibraryTable() {
+    public TableView<Song> getLibraryTable() {
         return libraryTable;
     }
 
-    public TableView<Mp3Song> getPlaylistTable() {
+    public TableView<Song> getPlaylistTable() {
         return playlistTable;
     }
 

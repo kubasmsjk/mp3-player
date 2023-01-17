@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 interface IMp3Parser {
-    Mp3Song createMp3Song(File file) throws IOException, TagException;
+    Song createMp3Song(File file) throws IOException, TagException;
 
-    List<Mp3Song> createMp3List(File dir) throws IOException, TagException;
+    List<Song> createMp3List(File dir) throws IOException, TagException;
 }

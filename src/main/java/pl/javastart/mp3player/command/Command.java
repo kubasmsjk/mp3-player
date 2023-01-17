@@ -3,15 +3,15 @@ package pl.javastart.mp3player.command;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 
 public abstract class Command<T> implements IMp3Command<T> {
     private TableView<T> playlistItemTableView;
-    private TableView<Mp3Song> contentTableView;
+    private TableView<Song> contentTableView;
     private TextField nameTextField;
     private Button button;
 
-    public Command(TableView<Mp3Song> contentTableView) {
+    public Command(TableView<Song> contentTableView) {
         this.contentTableView = contentTableView;
     }
 
@@ -21,7 +21,7 @@ public abstract class Command<T> implements IMp3Command<T> {
         this.button = button;
     }
 
-    public Command(TableView<T> playlistItemTableView, TableView<Mp3Song> contentTableView, Button button) {
+    public Command(TableView<T> playlistItemTableView, TableView<Song> contentTableView, Button button) {
         this.playlistItemTableView = playlistItemTableView;
         this.contentTableView = contentTableView;
         this.button = button;
@@ -31,7 +31,7 @@ public abstract class Command<T> implements IMp3Command<T> {
         return playlistItemTableView;
     }
 
-    public TableView<Mp3Song> getContentTableView() {
+    public TableView<Song> getContentTableView() {
         return contentTableView;
     }
 

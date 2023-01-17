@@ -3,12 +3,12 @@ package pl.javastart.mp3player.player;
 import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 
 import java.io.File;
 
 public abstract class Mp3PlayerComponent {
-    public static ObservableList<Mp3Song> songList;
+    public static ObservableList<Song> songList;
     private Media media;
     private MediaPlayer mediaPlayer;
 
@@ -31,7 +31,7 @@ public abstract class Mp3PlayerComponent {
         if (mediaPlayer != null && mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
             mediaPlayer.stop();
         }
-        Mp3Song mp3s = Mp3PlayerComponent.getSongList().get(index);
+        Song mp3s = Mp3PlayerComponent.getSongList().get(index);
         this.media = new Media(new File(mp3s.getFilePath()).toURI().toString());
         this.mediaPlayer = new MediaPlayer(media);
         mediaPlayer.statusProperty().addListener((observable, oldStatus, newStatus) -> {
@@ -62,11 +62,11 @@ public abstract class Mp3PlayerComponent {
     }
 
     //pobierz aktualną listę piosenek
-    public static ObservableList<Mp3Song> getSongList() {
+    public static ObservableList<Song> getSongList() {
         return songList;
     }
 
-    public static void setSongList(ObservableList<Mp3Song> songList) {
+    public static void setSongList(ObservableList<Song> songList) {
         Mp3PlayerComponent.songList = songList;
     }
 

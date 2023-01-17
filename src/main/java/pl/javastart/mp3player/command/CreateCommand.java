@@ -6,14 +6,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pl.javastart.mp3player.factoryMethodComponents.PlaylistItemProducer;
 import pl.javastart.mp3player.factoryMethodComponents.Playlists;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
 
 import java.util.Objects;
 
-public class CreateCommand extends Command<Mp3Song> {
+public class CreateCommand extends Command<Song> {
 
-    public CreateCommand(TableView<Mp3Song> playlistItemTableView, TextField nameTextField, Button button) {
+    public CreateCommand(TableView<Song> playlistItemTableView, TextField nameTextField, Button button) {
         super(playlistItemTableView, nameTextField, button);
     }
 

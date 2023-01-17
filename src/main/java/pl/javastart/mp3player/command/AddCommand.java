@@ -6,15 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import pl.javastart.mp3player.controller.EditPlaylistPaneController;
 import pl.javastart.mp3player.controller.PlaylistCreatorController;
-import pl.javastart.mp3player.factoryMethodComponents.PlaylistItem;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 
 import java.io.IOException;
 
-public class AddCommand extends Command<Mp3Song>{
-    public AddCommand(TableView<Mp3Song> contentTableView) {
+public class AddCommand extends Command<Song>{
+    public AddCommand(TableView<Song> contentTableView) {
         super(contentTableView);
     }
 

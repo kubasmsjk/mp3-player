@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -12,8 +11,7 @@ import pl.javastart.mp3player.command.DeleteCommand;
 import pl.javastart.mp3player.command.EditCommand;
 import pl.javastart.mp3player.factoryMethodComponents.MusicLibraryItem;
 import pl.javastart.mp3player.factoryMethodComponents.PlaylistItem;
-import pl.javastart.mp3player.mp3.Mp3File;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 import pl.javastart.mp3player.mp3.FileMetadataFacade;
 import pl.javastart.mp3player.player.Mp3Player;
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
@@ -61,7 +59,7 @@ public class MainController {
 
     //konfiguracja kliknieć w wiersze tabeli
     private void configureTableClick() {
-        TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
+        TableView<Song> contentTable = contentPaneController.getContentTable();
         TableView<PlaylistItem> playlistItemTable = contentPaneController.getPlayListPaneController().getContentTable();
 
         contentTable.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -75,8 +73,9 @@ public class MainController {
             if (!playlistItemTable.getSelectionModel().getSelectedCells().isEmpty()) {
                 defaultControls();
                 PlaylistItem playlistItem = playlistItemTable.getSelectionModel().getSelectedItem();
-                contentPaneController.getContentTable().setItems(playlistItem.getPlaylistSongs());
                 player.setMp3PlayerComponent(playlistItem);
+                Mp3PlayerComponent.setSongList(playlistItem.getPlaylistSongs());
+                contentPaneController.getContentTable().setItems(playlistItem.getPlaylistSongs());
             }
         });
 
@@ -139,7 +138,7 @@ public class MainController {
 
     //konfiguracja przycisków odtwarzacza
     private void configureButtons() {
-        TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
+        TableView<Song> contentTable = contentPaneController.getContentTable();
         ToggleButton playButton = contentPaneController.getControlPaneController().getPlayButton();
         Button prevButton = contentPaneController.getControlPaneController().getPreviousButton();
         Button nextButton = contentPaneController.getControlPaneController().getNextButton();
@@ -184,8 +183,8 @@ public class MainController {
             File file = fc.showOpenDialog(new Stage());
             try {
                 FileMetadataFacade metadataFacade = new FileMetadataFacade();
-                Mp3Song mp3Song = metadataFacade.createSong(file);
-                MusicLibraryItem.getSongList().add(mp3Song);
+                Song song = metadataFacade.createSong(file);
+                MusicLibraryItem.getSongList().add(song);
                 showMessage("Zaladowano plik " + file.getName());
             } catch (Exception e) {
                 showMessage("Nie można otworzyc pliku ");
@@ -235,7 +234,7 @@ public class MainController {
     }
 
     private void configurePlaylistButtons() {
-        TableView<Mp3Song> contentTable = contentPaneController.getContentTable();
+        TableView<Song> contentTable = contentPaneController.getContentTable();
         TableView<PlaylistItem> playlistTable = contentPaneController.getPlayListPaneController().getContentTable();
         Button delete = contentPaneController.getPlayListPaneController().getPlaylistToolBarPaneController().getDeleteButton();
         Button edit = contentPaneController.getPlayListPaneController().getPlaylistToolBarPaneController().getEditButton();

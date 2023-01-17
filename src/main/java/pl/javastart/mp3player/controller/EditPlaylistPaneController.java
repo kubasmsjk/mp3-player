@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.*;
 import pl.javastart.mp3player.command.AddCommand;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 
 public class EditPlaylistPaneController {
     @FXML
@@ -17,7 +17,7 @@ public class EditPlaylistPaneController {
     @FXML
     private Button deleteButton;
     @FXML
-    private TableView<Mp3Song> contentTable;
+    private TableView<Song> contentTable;
 
     private static final String TITLE_COLUMN = "Title";
     private static final String AUTHOR_COLUMN = "Author";
@@ -40,15 +40,15 @@ public class EditPlaylistPaneController {
 
     //konfiguracja kolumn tabeli
     private void configureTableColumns() {
-        TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
+        TableColumn<Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.setSortable(false);
 
-        TableColumn<Mp3Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
+        TableColumn<Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setSortable(false);
 
-        TableColumn<Mp3Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
+        TableColumn<Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
         albumColumn.setSortable(false);
 
@@ -61,8 +61,8 @@ public class EditPlaylistPaneController {
         deleteButton.setDisable(true);
 
         deleteButton.setOnAction(event -> {
-            Mp3Song mp3Song = contentTable.getSelectionModel().getSelectedItem();
-            contentTable.getItems().remove(mp3Song);
+            Song song = contentTable.getSelectionModel().getSelectedItem();
+            contentTable.getItems().remove(song);
         });
 
         addButton.setOnAction(event -> {
@@ -71,7 +71,7 @@ public class EditPlaylistPaneController {
     }
     private void configureDragAndDrop(){
         contentTable.setRowFactory(tv -> {
-            TableRow<Mp3Song> row = new TableRow<>();
+            TableRow<Song> row = new TableRow<>();
 
             row.setOnDragDetected(event -> {
                 if (! row.isEmpty()) {
@@ -99,7 +99,7 @@ public class EditPlaylistPaneController {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(SERIALIZED_MIME_TYPE)) {
                     int draggedIndex = (Integer) db.getContent(SERIALIZED_MIME_TYPE);
-                    Mp3Song draggedSong = contentTable.getItems().remove(draggedIndex);
+                    Song draggedSong = contentTable.getItems().remove(draggedIndex);
 
                     int dropIndex ;
 
@@ -121,7 +121,7 @@ public class EditPlaylistPaneController {
         });
 
     }
-    public TableView<Mp3Song> getContentTable() {
+    public TableView<Song> getContentTable() {
         return contentTable;
     }
 

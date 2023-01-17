@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 
 public class ContentPaneController {
     @FXML
@@ -12,7 +12,7 @@ public class ContentPaneController {
     @FXML
     private PlayListPaneController playlistPaneController;
     @FXML
-    private TableView<Mp3Song> contentTable;
+    private TableView<Song> contentTable;
 
     private static final String TITLE_COLUMN = "Title";
     private static final String AUTHOR_COLUMN = "Author";
@@ -25,15 +25,15 @@ public class ContentPaneController {
 
     //konfiguracja kolumn tabeli
     private void configureTableColumns() {
-        TableColumn<Mp3Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
+        TableColumn<Song, String> titleColumn = new TableColumn<>(TITLE_COLUMN);
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         titleColumn.setSortable(false);
 
-        TableColumn<Mp3Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
+        TableColumn<Song, String> authorColumn = new TableColumn<>(AUTHOR_COLUMN);
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         authorColumn.setSortable(false);
 
-        TableColumn<Mp3Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
+        TableColumn<Song, String> albumColumn = new TableColumn<>(ALBUM_COLUMN);
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
         albumColumn.setSortable(false);
 
@@ -42,7 +42,7 @@ public class ContentPaneController {
         contentTable.getColumns().add(albumColumn);
     }
 
-    public TableView<Mp3Song> getContentTable() {
+    public TableView<Song> getContentTable() {
         return contentTable;
     }
 

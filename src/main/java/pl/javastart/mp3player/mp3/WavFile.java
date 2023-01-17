@@ -19,7 +19,7 @@ public class WavFile {
         this.file = file;
     }
 
-    public Mp3Song getSongWithMetadata() {
+    public Song getSongWithMetadata() {
         AudioFile f;
         WavTag tag;
         int duration;
@@ -33,7 +33,7 @@ public class WavFile {
             throw new RuntimeException(e);
         }
 
-        return new Mp3Song(tag.getFirst(FieldKey.TITLE), tag.getFirst(FieldKey.ARTIST), tag.getFirst(FieldKey.ALBUM), duration, file.getAbsolutePath());
+        return new Song(tag.getFirst(FieldKey.TITLE), tag.getFirst(FieldKey.ARTIST), tag.getFirst(FieldKey.ALBUM), duration, file.getAbsolutePath());
     }
 }
 

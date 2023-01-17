@@ -1,13 +1,13 @@
 package pl.javastart.mp3player.mp3;
 
-public class Mp3Song {
+public class Song {
     private String title;
     private String author;
     private String album;
     private int duration;
     private String filePath;
 
-    public Mp3Song(String title, String author, String album, int duration, String filePath) {
+    public Song(String title, String author, String album, int duration, String filePath) {
         this.title = title;
         this.author = author;
         this.album = album;

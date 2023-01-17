@@ -2,11 +2,11 @@ package pl.javastart.mp3player.factoryMethodComponents;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pl.javastart.mp3player.mp3.Mp3Song;
+import pl.javastart.mp3player.mp3.Song;
 import pl.javastart.mp3player.player.Mp3PlayerComponent;
 
 public class MusicLibraryItem extends Mp3PlayerComponent {
-    ObservableList<Mp3Song> librarySongs = FXCollections.observableArrayList();
+    ObservableList<Song> librarySongs = FXCollections.observableArrayList();
     private static volatile MusicLibraryItem instance = null;
 
     private MusicLibraryItem() {
@@ -31,7 +31,7 @@ public class MusicLibraryItem extends Mp3PlayerComponent {
         songList = librarySongs;
     }
 
-    public ObservableList<Mp3Song> getLibrarySongs() {
+    public ObservableList<Song> getLibrarySongs() {
         return librarySongs;
     }
 }
