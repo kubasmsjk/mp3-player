@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import pl.ztp.mp3player.factoryMethodComponents.PlaylistItem;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 public class ExportJSON {
     private static FileWriter file;

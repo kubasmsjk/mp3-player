@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 public class ContentPaneController {
     @FXML

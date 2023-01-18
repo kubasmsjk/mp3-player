@@ -1,7 +1,7 @@
-package pl.ztp.mp3player.strategy;
+package pl.ztp.mp3player.libraryStrategy;
 
 import javafx.collections.ObservableList;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 public interface ISortStrategy {
     void sort(ObservableList<Song> songsList);

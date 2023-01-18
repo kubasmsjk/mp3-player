@@ -3,7 +3,7 @@ package pl.ztp.mp3player.player;
 import javafx.collections.ObservableList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 import java.io.File;
 

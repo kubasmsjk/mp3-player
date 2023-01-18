@@ -1,4 +1,4 @@
-package pl.ztp.mp3player.mp3;
+package pl.ztp.mp3player.fileFacade;
 
 public class Song {
     private String title;

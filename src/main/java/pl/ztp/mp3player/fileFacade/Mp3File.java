@@ -1,4 +1,4 @@
-package pl.ztp.mp3player.mp3;
+package pl.ztp.mp3player.fileFacade;
 
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;

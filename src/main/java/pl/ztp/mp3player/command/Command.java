@@ -3,7 +3,7 @@ package pl.ztp.mp3player.command;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 public abstract class Command<T> implements IMp3Command<T> {
     private TableView<T> playlistItemTableView;

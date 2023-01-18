@@ -1,8 +1,8 @@
-package pl.ztp.mp3player.strategy;
+package pl.ztp.mp3player.libraryStrategy;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 import java.util.Comparator;
 

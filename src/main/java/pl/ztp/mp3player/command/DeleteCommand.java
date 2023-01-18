@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import pl.ztp.mp3player.factoryMethodComponents.MusicLibraryItem;
 import pl.ztp.mp3player.factoryMethodComponents.PlaylistItem;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 import pl.ztp.mp3player.player.Mp3Player;
 
 public class DeleteCommand extends Command<PlaylistItem> {

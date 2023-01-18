@@ -11,6 +11,6 @@ module mp3player {
 
     exports pl.ztp.mp3player.main to javafx.graphics;
     opens pl.ztp.mp3player.controller to javafx.fxml;
-    opens pl.ztp.mp3player.mp3 to javafx.base;
+    opens pl.ztp.mp3player.fileFacade to javafx.base;
     opens pl.ztp.mp3player.factoryMethodComponents to javafx.base;
 }

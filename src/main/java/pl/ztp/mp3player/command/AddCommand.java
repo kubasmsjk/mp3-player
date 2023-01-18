@@ -9,7 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.ztp.mp3player.controller.PlaylistCreatorController;
 import pl.ztp.mp3player.factoryMethodComponents.MusicLibraryItem;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 import java.io.IOException;
 

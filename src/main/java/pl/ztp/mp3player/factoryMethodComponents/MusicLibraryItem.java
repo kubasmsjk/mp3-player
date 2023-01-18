@@ -2,7 +2,7 @@ package pl.ztp.mp3player.factoryMethodComponents;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 import pl.ztp.mp3player.player.Mp3PlayerComponent;
 
 public class MusicLibraryItem extends Mp3PlayerComponent {

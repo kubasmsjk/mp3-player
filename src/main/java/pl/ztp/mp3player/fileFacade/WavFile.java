@@ -1,4 +1,4 @@
-package pl.ztp.mp3player.mp3;
+package pl.ztp.mp3player.fileFacade;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;

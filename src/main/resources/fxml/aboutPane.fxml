@@ -12,7 +12,10 @@
 
 &#10;Wykorzystane biblioteki:
 
-&#10;http://javamusictag.sourceforge.net/"
+&#10;http://javamusictag.sourceforge.net/
+&#10;https://mvnrepository.com/artifact/net.sf.javamusictag
+&#10;https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+&#10;https://mvnrepository.com/artifact/commons-io/commons-io"
                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </children>

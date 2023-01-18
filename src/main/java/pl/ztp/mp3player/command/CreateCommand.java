@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pl.ztp.mp3player.factoryMethodComponents.PlaylistItemProducer;
 import pl.ztp.mp3player.factoryMethodComponents.Playlists;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 import pl.ztp.mp3player.player.Mp3PlayerComponent;
 
 import java.util.Objects;

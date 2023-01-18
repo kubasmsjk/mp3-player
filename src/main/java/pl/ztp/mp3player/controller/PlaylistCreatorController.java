@@ -8,7 +8,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.VBox;
 import pl.ztp.mp3player.command.CreateCommand;
 import pl.ztp.mp3player.factoryMethodComponents.MusicLibraryItem;
-import pl.ztp.mp3player.mp3.Song;
+import pl.ztp.mp3player.fileFacade.Song;
 
 
 public class PlaylistCreatorController {
